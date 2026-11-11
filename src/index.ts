@@ -2,7 +2,7 @@ import "dotenv/config";
 import express, { Request, Response, NextFunction } from "express";
 import { connect, keyStores, KeyPair, Contract } from "near-api-js";
 
-const PORT = Number(process.env.SIDECAR_PORT ?? 4100);
+const PORT = Number(process.env.PORT ?? process.env.SIDECAR_PORT ?? 4100);
 const RESOLVER_ACCOUNT = process.env.RESOLVER_ACCOUNT!;
 const RESOLVER_KEY = process.env.NEAR_RESOLVER_PRIVATE_KEY!;
 const CONTRACT_ID = process.env.CONTRACT_ID!;
@@ -119,8 +119,8 @@ app.post("/retrySplit", async (req, res) => {
   }
 });
 
-app.listen(PORT, "127.0.0.1", () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(
-    `[near-signer] listening on 127.0.0.1:${PORT}, network=${NETWORK_ID}, resolver=${RESOLVER_ACCOUNT}, contract=${CONTRACT_ID}`
+    `[near-signer] listening on 0.0.0.0:${PORT}, network=${NETWORK_ID}, resolver=${RESOLVER_ACCOUNT}, contract=${CONTRACT_ID}`
   );
 });
